@@ -1,21 +1,18 @@
-I've seen examples of *Command Pattern* that I don't consider accurate. 
+I've seen examples of **Command Pattern** that I don't consider accurate. 
 
 For example [this one in O`Reilly webpage](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch09s08.html): 
 
-```
+```js
 var CarManager = {
   
-    // request information
     requestInfo: function( model, id ){
         return "The information for " + model + " with ID " + id + " is foobar";
     },
     
-    // purchase the car
     buyVehicle: function( model, id ){
         return "You have successfully purchased Item " + id + ", a " + model;
     },
     
-    // arrange a viewing
     arrangeViewing: function( model, id ){
         return "You have successfully booked a viewing of " + model + " ( " + id + " ) ";
     }
@@ -30,11 +27,11 @@ CarManager.execute( "arrangeViewing", "Ferrari", "14523" );
 
 ```
 
-I guess this is fine, because even when it's not using *command objects*, it assumes that all commands will be called with the generic `apply` method. However, this also assumes that each command _can have different number of arguments_. And I'm not happy with that because that goes against the _shared interface_ idea.
+I guess this is fine, because even when it's not using **command objects**, it assumes that all commands will be called with the generic `apply` method. However, this also assumes that each command _can have different number of arguments_. And I'm not happy with that because that goes against the _shared interface_ idea.
 
 By other hand, stress here is in `Manager.execute()`, while in my understanding the `execute` interface implementation is relevant only in the commands, not in the Invoker (meaning, not in the manager we have seen in the example). Like `requestInfoCommand.execute()`.
 
-Finally, the `Manager` is *tightly coupled* to the commands, while it should be able to receive commands _by injection_. Why? Because that way you will be ok with the [Open/Close principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of Clean Code.
+Finally, the `Manager` is **tightly coupled** to the commands, while it should be able to receive commands _by injection_. Why? Because that way you will be ok with the [Open/Close principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of Clean Code.
 
 So, I wanted to make a _proof of concept_ by using objects instead of functions, and I came up with this example of a Storage, which basically handles lists. 
 
@@ -46,9 +43,9 @@ And add items like this:
 
 `carsListManager.do(new AddItemCommmand('Volvo'));`
 
-So, even when the Invoker has a "do" interface, the *Command Pattern* is not about that. The real thing occurs inside the manager:
+So, even when the Invoker has a "do" interface, the **Command Pattern** is not about that. The real thing occurs inside the manager:
 
-```
+```js
 do(command) {
   command.execute;
 } 
@@ -56,7 +53,7 @@ do(command) {
 
 By the way, notice that we are keeping track of executing history, so we could implement `undo` operations later on:
 
-```
+```js
 do(command) {
   command.execute;
   this.executed.push(command);
