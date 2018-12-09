@@ -46,7 +46,7 @@ All of that being said, I wanted to make a _proof of concept_ by using classes i
 
 You can create lists like this:
 
-`const carsListManager = new CarsListManager('cars');`
+`const carsListManager = new ListManager('cars');`
 
 And add items like this:
 
