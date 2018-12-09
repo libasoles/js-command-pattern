@@ -42,7 +42,7 @@ That's very close to _actions_ in *Redux*, btw. Like: `dispatch({type: "DIVIDE",
 
 Still, these kind of messages carries data but doesn't have any functionality on themselves. They trigger tightly coupled methods in the calculator (which is Ok for this example but wouldn't be enough for other scenarios). Finally, I must say that anyway I prefer this syntax to the previous one because is quite good in a semantic sense (object literals do the trick).
 
-So, all of that being said, I wanted to make a _proof of concept_ by using classes instead of functions, and I came up with this example of a Storage, which basically handles lists. 
+All of that being said, I wanted to make a _proof of concept_ by using classes instead of functions, and I came up with this example of a Storage, which basically handles lists. 
 
 You can create lists like this:
 
@@ -56,7 +56,7 @@ So, even when the Invoker has a "do" interface, the **Command Pattern** is not a
 
 ```js
 do(command) {
-  command.execute;
+  command.execute();
 } 
 ```
 
@@ -64,12 +64,25 @@ By the way, notice that we are keeping track of executing history, so we could i
 
 ```js
 do(command) {
-  command.execute;
+  command.execute();
   this.executed.push(command);
 } 
 ```
 
-My example is a _work in progress_, and it could be enhanced in several ways. But basically it shows what I wanted to show. 
+I haven't implemented that yet, but check this anyway:
+
+```
+const manager = new ListManager('Numbers');
+manager.do(new AddItemCommmand(5));
+manager.do(new AddItemCommmand(7));
+manager.do(new AddItemCommmand(3));
+manager.do(new RemoveItemCommand(5));
+
+const history = manager.history.join(' > ');
+console.log(history);
+```
+
+So, my example is a _work in progress_, and it could be enhanced in several ways. But basically it shows what I wanted to show. 
 
 For further research, see the wikipedia example for js:
 https://en.wikipedia.org/wiki/Command_pattern#JavaScript
