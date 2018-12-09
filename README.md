@@ -1,6 +1,7 @@
-I've seen examples of **Command Pattern** that I don't consider accurate. 
+I've seen examples of **Command Pattern** that I don't consider accurate. This video in particular seems to me like a misleading approach: 
+https://www.youtube.com/watch?v=NxsHi7nQQQI
 
-For example [this one in O`Reilly webpage](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch09s08.html): 
+But let's check [this one from O`Reilly webpage](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch09s08.html): 
 
 ```js
 var CarManager = {
@@ -61,6 +62,9 @@ do(command) {
 ```
 
 My example is a _work in progress_, and it could be enhanced in several ways. But basically it shows what I wanted to show. 
+
+For further research, see the wikipedia example for js:
+https://en.wikipedia.org/wiki/Command_pattern#JavaScript
 
 Feel free to commment. Comments are welcome.
  
