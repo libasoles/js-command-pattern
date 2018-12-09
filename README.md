@@ -28,11 +28,11 @@ CarManager.execute( "arrangeViewing", "Ferrari", "14523" );
 
 ```
 
-I guess this is fine, because even when it's not using **command objects**, it assumes that all commands will be called with the generic `apply` method.
+I guess this is fine, because even when it's not using **command objects**, it assumes that all commands will be called with the generic `apply` method. However, this forces all commands to receive _the same number of parameters_ (and we could improve that by using classes and constructors as we'll see later).
 
-However, stress here is in `Manager.execute()`, while in my understanding the `execute` interface implementation is relevant only in the commands, not in the Invoker (meaning, not in the manager we have seen in the example). Like `requestInfoCommand.execute()`.
+By other hand, stress here is in `Manager.execute()`, while in my understanding the `execute` interface implementation is relevant only in the commands, not in the Invoker (meaning, not in the manager we have seen in the example). Like `requestInfoCommand.execute()`.
 
-By other hand, the `Manager` is **tightly coupled** to the commands, while it should be able to receive commands _by injection_. Why? Because that way you will be Ok with the [Open/Close principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of Clean Code when you need to add _new commands_ to the manager.
+Finally, notice the `Manager` is **tightly coupled** to the commands, while it should be able to receive commands _by injection_. Why? Because that way you will be Ok with the [Open/Close principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of Clean Code when you need to add _new commands_ to the manager.
 
 [This other example](http://www.discoversdk.com/blog/learning-the-command-pattern-in-javascript) (of a Calculator) likes me more because it uses objects as messages:
 
@@ -40,9 +40,9 @@ By other hand, the `Manager` is **tightly coupled** to the commands, while it sh
 
 That's very close to _actions_ in *Redux*, btw. Like: `dispatch({type: "DIVIDE", payload: [1, 6]})`.
 
-Still, these kind of messages carries data but doesn't have any functionality on themselves. They trigger tightly coupled methods in the calculator (which is Ok for this example but wouldn't be enough for other scenarios). Finally, I must say that anyway I prefer this syntax to the previous one because is quite good in a semantic sense (object literals do the trick).
+Still, these kind of messages carries data but doesn’t have any functionality on themselves. They trigger tightly coupled methods in the calculator (which is Ok for this example but wouldn’t be enough for other scenarios). I must say that anyway I prefer this syntax to the previous one because is quite good in a semantic sense (object literals do the trick).
 
-All of that being said, I wanted to make a _proof of concept_ by using classes instead of functions, and I came up with this example of a Storage, which basically handles lists. 
+All of that being said, I wanted to make a _proof of concept_ by using classes instead of functions, and I came up with this example of a Storage, which basically handles lists.
 
 You can create lists like this:
 
@@ -60,7 +60,7 @@ do(command) {
 } 
 ```
 
-By the way, notice that we are keeping track of executing history, so we could implement `undo` operations later on:
+By the way, notice that we are keeping track of execution history, so we could implement `undo` operations later on:
 
 ```js
 do(command) {
